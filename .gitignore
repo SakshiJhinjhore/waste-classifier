@@ -1,0 +1,39 @@
+# Virtual Environment
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# ML model files (can be large)
+*.h5
+*.pt
+*.pth
+*.ckpt
+
+# Dataset folders (usually large)
+data/
+dataset/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings (optional)
+.vscode/
+
+# Streamlit cache
+.streamlit/
