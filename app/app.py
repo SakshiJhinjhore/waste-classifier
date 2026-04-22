@@ -1,28 +1,45 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-import streamlit as st
+import gradio as gr
+import tensorflow as tf
+import numpy as np
 from PIL import Image
-from src.predict import predict_image
 
-st.title("♻️ Waste Classification System")
+# Load model
+model = tf.keras.models.load_model("waste_model.h5")
 
-uploaded_file = st.file_uploader("Upload an image", type=["jpg","png","jpeg"])
+class_names = ['battery', 'biological', 'brown-glass', 'cardboard', 'clothes',
+               'green-glass', 'metal', 'paper', 'plastic', 'shoes', 'trash', 'white-glass']
 
-if uploaded_file:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+def predict_image(image):
+    img = image.resize((160,160))
+    img_array = np.array(img) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
 
-    label, confidence = predict_image(image)
+    predictions = model.predict(img_array)
+    score = tf.nn.softmax(predictions[0]).numpy()
 
-    st.write(f"### Prediction: {label}")
-    st.write(f"Confidence: {confidence:.2f}")
+    label = class_names[np.argmax(score)]
+    confidence = float(np.max(score))
 
-    if label in ['plastic','metal','glass','paper','cardboard']:
-        st.success("♻️ Recyclable Waste")
-    elif label in ['battery']:
-        st.warning("⚠️ Hazardous Waste")
+    # FIXED logic
+    if label in ['plastic','metal','paper','cardboard'] or 'glass' in label:
+        category = "♻️ Recyclable Waste"
+    elif label == 'battery':
+        category = "⚠️ Hazardous Waste"
     else:
-        st.error("🚯 Non-Recyclable Waste")
+        category = "🚯 Non-Recyclable Waste"
+
+    return {
+        "Prediction": label,
+        "Confidence": round(confidence, 3),
+        "Category": category
+    }
+
+interface = gr.Interface(
+    fn=predict_image,
+    inputs=gr.Image(type="pil"),
+    outputs="json",
+    title="♻️ Waste Classification System",
+    description="Upload an image to classify waste"
+)
+
+interface.launch()
