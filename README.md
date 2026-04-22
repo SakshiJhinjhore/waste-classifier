@@ -1,91 +1,32 @@
-#  Waste Classifier (ML Project)
+# Waste Classification System  
 
-##  Overview
-
-This project is a Machine Learning-based web application that classifies waste into different categories using image classification. It helps in promoting proper waste segregation and environmental sustainability.
-
----
-
-##  Features
-
-* Upload an image of waste
-* Predicts the category of waste
-* Simple and interactive UI using Streamlit
-* Fast and efficient prediction
+ **Live Demo:**  
+ https://sakshijhinjhore-waste-classifier.hf.space  
 
 ---
 
-##  Tech Stack
+##  About the Project  
+This project is a Machine Learning-based waste classification system that identifies different types of waste such as plastic, metal, paper, glass, etc.
 
-* Python
-* TensorFlow / Keras
-* Streamlit
-* NumPy, OpenCV
+The model is built using TensorFlow and deployed using Hugging Face Spaces with a Gradio interface.
 
 ---
 
-##  Project Structure
-
-```
-waste-classifier/
-│
-├── app/              # Streamlit app
-├── src/              # Model & training code
-├── models/           # Trained model (ignored)
-├── data/             # Dataset (ignored)
-├── .gitignore
-├── README.md
-└── requirements.txt
-```
+##  Features  
+- Image-based waste classification  
+- Multiple categories (plastic, metal, paper, etc.)  
+- Real-time predictions  
+- Clean and simple UI  
 
 ---
 
-##  How to Run Locally
-
-1. Clone the repository:
-
-```
-git clone https://github.com/SakshiJhinjhore/waste-classifier.git
-cd waste-classifier
-```
-
-2. Create virtual environment:
-
-```
-python -m venv venv
-venv\Scripts\activate
-```
-
-3. Install dependencies:
-
-```
-pip install -r requirements.txt
-```
-
-4. Run the app:
-
-```
-streamlit run app/app.py
-```
+##  Tech Stack  
+- Python  
+- TensorFlow  
+- Gradio  
+- Hugging Face Spaces  
 
 ---
 
-##  Note
-
-* Dataset and trained model files are not included due to size limitations.
-* You can train the model using your own dataset.
-
----
-
-##  Future Improvements
-
-* Add more waste categories
-* Improve model accuracy
-* Deploy as a web application
-* Add real-time camera detection
-
----
-
-##  Author
-
-Sakshi Jhinjhore
+## 🔗 Live Application  
+ https://sakshijhinjhore-waste-classifier.hf.space  
